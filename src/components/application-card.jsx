@@ -26,9 +26,9 @@ const handleStatusChange =(status)=>{
 }
   return (
     <div>
-        <Card>
+        <Card className='bg-[rgba(44,32,19,0.79)]'>
             {loadingHiringStatus && <BarLoader width={"100%"} color='#36d7b7' />}
-            <CardHeader>
+            <CardHeader >
                 <CardTitle className='flex justify-between font-bold'>
                     {isCandidate 
                         ? `${application?.job?.title} at ${application?.job?.company?.name}` 

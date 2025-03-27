@@ -66,7 +66,7 @@ const JobCard = ({
     }, [savedJob]);
 
     return (
-        <Card className='flex flex-col'>
+        <Card className='flex flex-col bg-[rgba(44,32,19,0.79)]'>
             {loadingDeleteJob && (
                 <BarLoader className='mt-4' width={'100%'} color='#36d7b7' />
             )}

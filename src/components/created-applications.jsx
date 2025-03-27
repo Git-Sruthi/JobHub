@@ -30,6 +30,7 @@ const CreatedApplications = () => {
       {applications?.map((application) => {
         return (
           <ApplicationCard
+            className='bg-[rgba(44,32,19,0.79)]'
             key={application.id}
             application={application}
             isCandidate={true}

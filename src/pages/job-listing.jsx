@@ -61,7 +61,7 @@ const JobListing = () => {
 
   return (
     <div>
-      <h1 className='gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8'>Latest Jobs</h1>
+      <h1 className='font-extrabold text-6xl sm:text-7xl text-center pb-8'>Latest Jobs</h1>
 
       {/* add filters here */}
       <form onSubmit={handleSearch} className='h-14 flex w-full gap-2 items-center mb-3'>
@@ -69,13 +69,13 @@ const JobListing = () => {
           type='text' 
           placeholder='Search Jobs by Title..'
           name='search-query'
-          className='h-full flex-1 px-4 text-md'/>
-        <Button type='submit' className='bg-[rgba(255,255,255,0.08)] border border-gray-500 hover: px-6 py-3 rounded-lg h-full sm:w-28' variant='ghost'>Search</Button>
+          className='h-full flex-1 px-4 text-md bg-[#32333de5] border-gray-500'/>
+        <Button type='submit' className='bg-[#1e293b] border border-gray-500 hover: px-6 py-3 rounded-lg h-full sm:w-28' variant='ghost'>Search</Button>
       </form>
 
-      <div className='flex flex-col sm:flex-row gap-2'>
+      <div className='flex gap-4 items-center'>
       <Select value={location} onValueChange={(value) => setLocation(value)}>
-        <SelectTrigger>
+        <SelectTrigger className="bg-[#32333de5]">
           <SelectValue placeholder="Filter by Location" />
         </SelectTrigger>
         <SelectContent>
@@ -92,7 +92,7 @@ const JobListing = () => {
         </SelectContent>
       </Select>
       <Select value={company_id} onValueChange={(value) => setCompany_id(value)}>
-        <SelectTrigger>
+        <SelectTrigger className="bg-[#32333de5]">
           <SelectValue placeholder="Filter by Company" />
         </SelectTrigger>
         <SelectContent>
@@ -109,7 +109,7 @@ const JobListing = () => {
         </SelectContent>
       </Select>
 
-      <Button onClick={clearFilters}variant='ghost' className='bg-[rgba(255,255,255,0.08)] border border-gray-500 hover: px-6 py-3 rounded-lg sm:w-1/2'>Clear Filters</Button>
+      <Button onClick={clearFilters}variant='ghost' className='bg-[#1e293b] border border-gray-500 hover: px-6 py-3 rounded-lg sm:w-1/2'>Clear Filters</Button>
       </div>
 
       {loadingJobs && (
@@ -117,7 +117,7 @@ const JobListing = () => {
       )}
 
       {loadingJobs === false && (
-        <div className='mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4'>
+        <div className='mt-8 grid md:grid-cols-2 lg:grid-cols-2 gap-4 '>
           {jobs?.length ?(
             jobs.map((job) => {
               return <JobCard 

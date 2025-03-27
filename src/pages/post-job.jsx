@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea'
 import useFetch from '@/hooks/use-fetch'
 import { useUser } from '@clerk/clerk-react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import MDEditor from '@uiw/react-md-editor'
+import MDEditor, { commands } from "@uiw/react-md-editor";
 import { State } from 'country-state-city'
 import React, { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -64,6 +64,9 @@ const PostJob = () => {
     })
   }
 
+
+  
+
   useEffect(()=>{
     if(dataCreateJob?.length>0)navigate('/jobs')
   },[loadingCreateJob])
@@ -78,16 +81,18 @@ const PostJob = () => {
 
   return (
     <div>
-      <h1 className='gradient-title font-extrabold text-5xl sm:text-7xl text-center pb-8'>
+      <h1 className='font-extrabold text-5xl sm:text-7xl text-center pb-8'>
         Post a Job
       </h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4 p-4 pb-0'>
-        <Input placeholder='Job Title' {...register("title")} />
+        <Input placeholder='Job Title' {...register("title")} 
+        className='h-full flex-1 px-4 text-md bg-[#32333de5] border-gray-500'/>
         {errors.title && <p className='text-red-500'>{errors.title.message}</p>}
       
 
-      <Textarea placeholder='Job Description' {...register("description")} />
+      <Textarea placeholder='Job Description' {...register("description")} 
+      className='h-full flex-1 px-4 text-md bg-[#32333de5] border-gray-500'/>
       {errors.description && (
         <p className='text-red-500'>{errors.description.message}</p>
       )}
@@ -97,8 +102,8 @@ const PostJob = () => {
             control={control}
             render={({field}) => (
               <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger >
-                  <SelectValue placeholder="Filter by Location" />
+                <SelectTrigger className="bg-[#32333de5]">
+                  <SelectValue placeholder="Location" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
@@ -121,8 +126,8 @@ const PostJob = () => {
             control={control}
             render={({field}) => (
               <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger >
-                  <SelectValue placeholder="Filter by Company">
+                <SelectTrigger className="bg-[#32333de5]">
+                  <SelectValue placeholder="Company">
                     {field.value
                       ?companies?.find((com) => com.id === Number(field.value))
                       ?.name 
@@ -157,12 +162,31 @@ const PostJob = () => {
       )}
 
       <Controller 
-            name='requirements'
-            control={control}
-            render={({field}) => (
-              <MDEditor value={field.value} onChange={field.onChange}/>
-            )}
+        name="requirements"
+        control={control}
+        render={({ field }) => (
+          <MDEditor 
+            value={field.value} 
+            onChange={field.onChange} 
+            className="bg-[#32333de5]"
+          />
+        )}
       />
+      {/* <Controller
+        name="requirements"
+        control={control}
+        render={({ field }) => (
+          <textarea
+            {...field}
+            className="bg-[#32333de5] w-full p-2 rounded text-white border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="5"
+            placeholder="Enter requirements here..."
+          />
+        )}
+      /> */}
+
+      
+      
       {errors.requirements && (
         <p className='text-red-500'>{errors.requirements.message}</p>
       )}
@@ -170,7 +194,7 @@ const PostJob = () => {
         <p className='text-red-500'>{errorCreateJob?.message}</p>
       )}
       {loadingCreateJob && <BarLoader className='mb-4' width={"100%"} color='#36d7b7'/>}
-      <Button type='submit' variant='blue' size='lg' className='mt-2'>Submit</Button>
+      <Button type='submit' variant='secondary' size='lg' className='mt-2'>Submit</Button>
 
       </form>
     </div>
